@@ -75,7 +75,7 @@ class _MainPageState extends State<MainPage> {
                       aspectRatio: 1,
                       child: ElevatedButton(
                         onPressed: () {},
-                        child: const Text('Botón 1'),
+                        child: const Text('Buscar Servicio'),
                       ),
                     ),
                   ),
@@ -88,7 +88,7 @@ class _MainPageState extends State<MainPage> {
                         onPressed: () {
                           print('Botón 2 clicado');
                         },
-                        child: const Text('Botón 2'),
+                        child: const Text('Ofrecer Servicio'),
                       ),
                     ),
                   ),
@@ -99,7 +99,7 @@ class _MainPageState extends State<MainPage> {
                       aspectRatio: 1,
                       child: ElevatedButton(
                         onPressed: () {},
-                        child: const Text('Botón 3'),
+                        child: const Text('Evaluar trabajo'),
                       ),
                     ),
                   ),
