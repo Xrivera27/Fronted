@@ -29,75 +29,79 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.blue,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 36.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+ @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    body: Container(
+      color: Colors.blue,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'Login',
+                style: TextStyle(
+                  fontSize: 36.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
-                const SizedBox(height: 20.0),
-                TextField(
-                  controller: _usernameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Username',
-                    filled: true,
-                    fillColor: Colors.white,
-                  ),
+              ),
+              const SizedBox(height: 20.0),
+              TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  labelText: 'Username',
+                  filled: true,
+                  fillColor: Colors.white,
                 ),
-                const SizedBox(height: 20.0),
-                TextField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    filled: true,
-                    fillColor: Colors.white,
-                  ),
-                  obscureText: true,
+              ),
+              const SizedBox(height: 20.0),
+              TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  filled: true,
+                  fillColor: Colors.white,
                 ),
-                const SizedBox(height: 20.0),
-                Row(
-                   mainAxisAlignment: MainAxisAlignment.center, // Ajusta la alineación al centro
-                       children: [
-                         ElevatedButton(
-                                onPressed: () {
-                                 _handleLogin(context);
-                              },
-                                 child: const Text('Iniciar sesión'),
-                                         ),
-                                   const SizedBox(width: 8.0), // Añade un espacio entre los botones
-                                TextButton(
-                                    onPressed: () {
-                               Navigator.push(
-                                                 context,
-                                          MaterialPageRoute(
-                                    builder: (context) => RegisterPage(),
-                                              ),
-        );
-      },
-      child: const Text('Registrarse'),
-    ),
-  ],
-),
-              ],
-            ),
+                obscureText: true,
+              ),
+              const SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _handleLogin(context);
+                    },
+                    child: const Text('Iniciar sesión'),
+                  ),
+                  const SizedBox(width: 8.0),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegisterPage(),
+                        ),
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      primary: Colors.white, // Color de texto blanco
+                    ),
+                    child: const Text('Registrarse'),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   void _handleLogin(BuildContext context) {
     String username = _usernameController.text;
