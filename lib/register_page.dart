@@ -1,21 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Registro App',
-      debugShowCheckedModeBanner: false,
-      home: RegisterPage(),
-    );
-  }
-}
+import 'login.dart'; // Importa el archivo principal para la navegación de vuelta
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -35,6 +19,19 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final TextEditingController _genderController = TextEditingController();
+
+  bool _validateAllFields() {
+    // Realiza validaciones para asegurarte de que todos los campos estén llenos
+    return _firstNameController.text.isNotEmpty &&
+        _lastNameController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
+        _phoneController.text.isNotEmpty &&
+        _usernameController.text.isNotEmpty &&
+        _birthdateController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty &&
+        _confirmPasswordController.text.isNotEmpty &&
+        _genderController.text.isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,11 +93,62 @@ class _RegisterPageState extends State<RegisterPage> {
             decoration: const InputDecoration(labelText: 'Sexo'),
           ),
           SizedBox(height: 20.0),
-          ElevatedButton(
-            onPressed: () {
-              _handleRegistration(context);
-            },
-            child: Text('Registrarse'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  if (_validateAllFields()) {
+                    _handleRegistration(context);
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Error de registro'),
+                          content: Text('Todos los campos son obligatorios.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Cerrar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                child: Text('Registrarse'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_validateAllFields()) {
+                    _handleRegistration(context);
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Error de registro'),
+                          content: Text('Todos los campos son obligatorios.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Cerrar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                child: Text('Aceptar'),
+              ),
+            ],
           ),
         ],
       ),
@@ -119,6 +167,9 @@ class _RegisterPageState extends State<RegisterPage> {
     String gender = _genderController.text;
 
     if (password == confirmPassword) {
+      // Lógica de registro (puedes personalizar según tus necesidades)
+      // Aquí puedes almacenar las nuevas credenciales, por ejemplo, en una base de datos o en algún servicio de backend.
+      // En este ejemplo, simplemente mostramos un mensaje de éxito.
       showDialog(
         context: context,
         builder: (context) {
@@ -129,10 +180,8 @@ class _RegisterPageState extends State<RegisterPage> {
             actions: <Widget>[
               TextButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
+                  // Navegar de vuelta a la pantalla de inicio de sesión después del registro exitoso
+                  Navigator.pop(context);
                 },
                 child: Text('Cerrar'),
               ),
@@ -140,6 +189,19 @@ class _RegisterPageState extends State<RegisterPage> {
           );
         },
       );
+      // Después de realizar el registro, puedes realizar acciones adicionales según tus necesidades.
+      // Por ejemplo, puedes enviar datos al servidor, almacenar en la base de datos local, etc.
+
+      // Limpia los controladores después del registro
+      _firstNameController.clear();
+      _lastNameController.clear();
+      _emailController.clear();
+      _phoneController.clear();
+      _usernameController.clear();
+      _birthdateController.clear();
+      _passwordController.clear();
+      _confirmPasswordController.clear();
+      _genderController.clear();
     } else {
       showDialog(
         context: context,
@@ -159,36 +221,5 @@ class _RegisterPageState extends State<RegisterPage> {
         },
       );
     }
-  }
-}
-
-class LoginPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.blue,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 36.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 20.0),
-                // ... código del formulario de inicio de sesión
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
