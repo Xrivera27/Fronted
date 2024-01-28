@@ -1,0 +1,33 @@
++-------------------+           +-------------------+          +------------------+
+|      Evento       |           |     Participante   |          |     Proveedor    |
++-------------------+           +-------------------+          +------------------+
+| - idEvento: int   |<>--------<| - idParticipante: |          | - idProveedor: int|
+| - nombre: string  |           |    int            |          | - nombre: string  |
+| - fecha: date     |           | - nombre: string  |          | - numEventos: int |
+| - ubicacion: string          | - tipo: string     |          +------------------+
+| - tipoEvento: string         |                   |
+| - entradas: Lista<Entrada>   |                   |
+| - organizadores: Lista<Participante> |          +------------------+
+| - proveedores: Lista<Proveedor>       |<>------>|      Entrada     |
+| - espacios: Lista<Espacio>            |          +------------------+
+| - programacion: Programacion          |          | - idEntrada: int |
++-------------------+                    |          | - tipo: string   |
+                                         |          | - precio: float  |
+                                         |          +------------------+
+                                         |
+                                         |
+                                         |          +------------------+
+                                         |          |      Espacio     |
+                                         +--------->|------------------|
+                                                    | - idEspacio: int |
+                                                    | - nombre: string  |
+                                                    +------------------+
+
++-------------------+                    +-------------------+
+|    Programacion   |                    |      Evento       |
++-------------------+                    +-------------------+
+| - idProgramacion: |                    | - idEvento: int   |
+|    int            |                    | - fecha: date     |
+| - detalles: string|                    | - programacion:   |
++-------------------+                    |   Programacion    |
+                                         +-------------------+
